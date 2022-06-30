@@ -7,7 +7,14 @@ export const HeaderStyles = styled.header`
   justify-content: space-around;
   align-items: center;
   background-color: white;
-  border-bottom: 1px solid black;
+  border: 0.5px solid #CCCCCC;
+  box-shadow: rgba(0, 0, 0, 0.15) 0  3px 3px;
+  min-width: fit-content;
+  label {
+    :hover {
+      transform: scale(1.1)
+    }
+  }
 `;
 
 export const UlStyles = styled.ul`

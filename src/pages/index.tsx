@@ -1,5 +1,4 @@
 import React from 'react'
-import  Logo from '../assets/black.svg'
 import  FilterByPrice  from '../components/FilterByPrice'
 import NavBarHeader from '../components/NavBarHeader'
 import ProductList from '../components/ProductList'
@@ -13,6 +12,7 @@ const Home: React.FC = () => {
         <FilterByPrice />
         <ProductList />
       </StylesDiv>
+      <h2>componente de paginação</h2>
     </>
     )
   }

@@ -1,12 +1,11 @@
 import React from 'react'
 import  Logo from '../assets/black.svg'
+import NavBarHeader from '../components/NavBarHeader'
 
 const Home: React.FC = () => {
   return (
     <>
-
-    <h1 data-testid="title">welcome to next.js</h1>
-
+    <NavBarHeader />
     </>
     )
   }

@@ -35,7 +35,7 @@ export default function NavBarHeader() {
         <label htmlFor="cart">
           <SectionCartStyles>
             <Image src={src} width={width} height={height} placeholder={blur} />
-            <DivCountStyles>1</DivCountStyles>
+            <DivCountStyles><p>0</p></DivCountStyles>
           </SectionCartStyles>
         </label>
       </SectionSvgStyles>

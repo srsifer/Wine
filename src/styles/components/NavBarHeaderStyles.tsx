@@ -53,15 +53,20 @@ export const SectionCartStyles = styled.section`
 `
 
 export const DivCountStyles = styled.div`
-  position: relative;
-  z-index: 1;
-  background-color: #ffffff;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  padding: 14%;
-  max-width: max-content;
-  max-height: max-content;
-  margin-left: -25px;
-  margin-bottom: -30px;
+position: absolute;
+left: 64.29%;
+right: 0%;
+top: 65.50%;
+bottom: 0%;
+background: #FFFFFF;
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 19px;
+text-align: center;
+box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+
   border-radius: 150%;
   font-weight: bolder;
   color: #4fbfa5;

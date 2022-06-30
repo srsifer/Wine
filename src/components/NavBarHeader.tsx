@@ -5,7 +5,14 @@ import Busca from '../assets/BuscaLupa.svg'
 import Perfil from '../assets/perfil.svg'
 import Cart from '../assets/Bitmap.png'
 import Image from 'next/image'
-import { ButtonSearchStyles, DivCountStyles, HeaderStyles, SectionCartStyles, SectionSvgStyles,  UlStyles } from '../styles/components/NavBarHeaderStyles'
+import {
+  ButtonSearchStyles,
+  DivCountStyles,
+  HeaderStyles,
+  SectionCartStyles,
+  SectionSvgStyles,
+  UlStyles
+  } from '../styles/components/NavBarHeaderStyles'
 
 
 const { src, width, height,blur }: any = Cart;

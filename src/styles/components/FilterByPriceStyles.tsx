@@ -5,11 +5,11 @@ export const FilterStylesDiv = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  border: 1px solid green;
   padding: 40px;
+  min-width: max-content;
   max-width: max-content;
   h2 {
-    margin-bottom: 15px;
+    margin-bottom: 40%;
   }
   h4{
     margin-bottom: 10px;

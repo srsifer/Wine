@@ -9,6 +9,7 @@ import {
   ButtonSearchStyles,
   DivCountStyles,
   HeaderStyles,
+  SeatchProduct,
   SectionCartStyles,
   SectionSvgStyles,
   UlStyles
@@ -61,14 +62,18 @@ export default function NavBarHeader({ setGetApi, getApi }: changeStateToFetchPr
       <SectionSvgStyles>
 
         <label>
-          <input
-            hidden={displaySearc}
-            onChange={(e) => handleChange(e.target.value)}
-            type="text" />
-          <button
-            hidden={displaySearc}
-            onClick={filterByText}
-          >buscar</button>
+          <SeatchProduct>
+            <input
+              hidden={displaySearc}
+              onChange={(e) => handleChange(e.target.value)}
+              type="text" />
+            <ButtonSearchStyles
+              hidden={displaySearc}
+              onClick={filterByText}
+            >
+              <Busca />
+            </ButtonSearchStyles>
+          </SeatchProduct>
           <ButtonSearchStyles
             hidden={!displaySearc}
             onClick={toggleDisplay}

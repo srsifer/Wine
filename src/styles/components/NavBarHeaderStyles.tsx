@@ -31,14 +31,41 @@ export const SectionSvgStyles = styled.section`
   align-items: center;
   width: 30%;
 `
+export const SeatchProduct = styled.div`
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   min-width: 10vw;
+   width: 15vw;
+
+  input {
+    border: 1px solid;
+    border-radius: 2rem;
+    background-color: #ffffff52;
+    width: 15vw;
+    height: 6vh;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+  }
+  button{
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 100%;
+    position: relative;
+    margin-left: -75px;
+    :hover{
+      transform: none;
+    }
+  }
+
+`;
 
 export const ButtonSearchStyles = styled.button`
   border: none;
+  position: relative;
+  margin-left: +12vw;
   background: none;
-  :hover {
-    color: blue;
-    transform: scale(1.1);
-  }
 `
 export const SectionCartStyles = styled.section`
   background-color: #f9b950;
@@ -53,10 +80,12 @@ export const SectionCartStyles = styled.section`
   img {
     border-radius: 0 0 16% 16%;
   }
+
   :hover {
     color: blue;
     transform: scale(1.1);
   }
+
 `
 
 export const DivCountStyles = styled.div`

@@ -1,7 +1,7 @@
 import { FilterPriceUlStyles, FilterStylesDiv } from '../styles/components/FilterByPriceStyles'
 
 
-export interface changeStateToFetchProps {
+interface changeStateToFetchProps {
   setGetApi: Function,
   getApi: object,
 }

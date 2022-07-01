@@ -4,11 +4,13 @@ import { FilterPriceUlStyles, FilterStylesDiv } from '../styles/components/Filte
 interface changeStateToFetchProps {
   setGetApi: Function,
   getApi: object,
+
 }
 
-const FilterByPrice = ({setGetApi, getApi}: changeStateToFetchProps): JSX.Element  => {
+const FilterByPrice = ({setGetApi, getApi, }: changeStateToFetchProps): JSX.Element  => {
   const filterPrice = (priceStart: number, priceEnd: number ) => {
-    setGetApi({...getApi, priceStart, priceEnd})
+
+    setGetApi({...getApi, priceStart, priceEnd, type: 'priceFilter'})
   }
 
   return (

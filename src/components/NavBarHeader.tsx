@@ -38,8 +38,7 @@ export default function NavBarHeader({ setGetApi, getApi }: changeStateToFetchPr
   }
 
   const filterByText = () => {
-    setGetApi({ ...getApi, ProductName: textFilter })
-    console.log(getApi)
+    setGetApi({ ...getApi, ProductName: textFilter, type: 'textFilter' })
     toggleDisplay()
   }
 

@@ -5,8 +5,6 @@ import { DataProps } from '../utils/typesItem'
 import ProductCard from './ProductCard'
 
 const ProductList = ({data}: any) => {
-  console.log(data)
-
   return (
     <MainContentDivList>
       <DivProductsFound>

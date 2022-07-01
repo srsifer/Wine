@@ -1,33 +1,36 @@
-import React, { useState } from 'react'
-import  FilterByPrice  from '../components/FilterByPrice'
+import React, { useEffect, useState } from 'react'
+import FilterByPrice from '../components/FilterByPrice'
 import NavBarHeader from '../components/NavBarHeader'
 import ProductList from '../components/ProductList'
 import { StylesDiv } from '../styles/pages/indexStyles'
 import { useFetch, UseFetchProps } from '../utils/getAPIWithSwr'
 
 const Home: React.FC = () => {
-  const [getApi, setGetApi] = useState<UseFetchProps>({
-    priceStart: undefined,
-    priceEnd: undefined,
-    ProductName: undefined,
-    page: undefined,
-  })
+  const InitialStateGetApi = {
+    priceStart: 0,
+    priceEnd: 600,
+    ProductName: '',
+    page: '1',
+    type: ''
+  }
+  const [getApi, setGetApi] = useState<UseFetchProps>({ ...InitialStateGetApi })
 
-  const {data} = useFetch(getApi)
 
-  if(!data){
-      return <h1>carregando</h1>
-    }else{
-      return (
-        <>
-          <NavBarHeader setGetApi={setGetApi} getApi={getApi}/>
-          <StylesDiv>
-             <FilterByPrice  setGetApi={setGetApi} getApi={getApi} />
-            <ProductList data={data} />
-          </StylesDiv>
-          <h2>componente de paginação</h2>
-        </>
-        )
-      }
-    }
-  export default Home
+  const { data } = useFetch(getApi)
+
+  if (!data) {
+    return <h1>carregando</h1>
+  } else {
+    return (
+      <>
+        <NavBarHeader setGetApi={setGetApi} getApi={getApi} />
+        <StylesDiv>
+          <FilterByPrice setGetApi={setGetApi} getApi={getApi} />
+          <ProductList data={data} />
+        </StylesDiv>
+        <h2>componente de paginação</h2>
+      </>
+    )
+  }
+}
+export default Home

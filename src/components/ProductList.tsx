@@ -4,24 +4,19 @@ import { useFetch } from '../utils/getAPIWithSwr'
 import { DataProps } from '../utils/typesItem'
 import ProductCard from './ProductCard'
 
-const ProductList: React.FC = () => {
-  const {data} = useFetch<DataProps>('https://wine-back-test.herokuapp.com/products?page=1&limit=10')
+const ProductList = ({data}: any) => {
   console.log(data)
-
-  if(!data) {
-    return <h1>carregando ...</h1>
-  }
 
   return (
     <MainContentDivList>
-    <DivProductsFound>
-      <h3>{`${data.totalItems} produtos foram encontrados`}</h3>
-    </DivProductsFound>
+      <DivProductsFound>
+        <h3>{`${data.totalItems} produtos foram encontrados`}</h3>
+      </DivProductsFound>
     <ProductListStylesDiv>
-      {
-        data.items.map((item) => {
+        {
+        data.items.map((item: any) => {
           return(
-            <ProductCard item={item}/>
+            <ProductCard key={item.id} item={item}/>
           )
         })
       }

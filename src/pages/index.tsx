@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import FilterByPrice from '../components/FilterByPrice'
 import NavBarHeader from '../components/NavBarHeader'
+import Pagination from '../components/Pagination'
 import ProductList from '../components/ProductList'
 import { StylesDiv } from '../styles/pages/indexStyles'
 import { useFetch, UseFetchProps } from '../utils/getAPIWithSwr'
+import { DataProps } from '../utils/typesItem'
 
 const Home: React.FC = () => {
   const InitialStateGetApi = {
@@ -13,10 +15,11 @@ const Home: React.FC = () => {
     page: '1',
     type: ''
   }
+  const [offSet, setOffSet] = useState(0)
   const [getApi, setGetApi] = useState<UseFetchProps>({ ...InitialStateGetApi })
 
 
-  const { data } = useFetch(getApi)
+  const { data } = useFetch<DataProps>(getApi)
 
   if (!data) {
     return <h1>carregando</h1>
@@ -28,7 +31,7 @@ const Home: React.FC = () => {
           <FilterByPrice setGetApi={setGetApi} getApi={getApi} />
           <ProductList data={data} />
         </StylesDiv>
-        <h2>componente de paginação</h2>
+        <Pagination limit={data.itemsPerPage} current={data.page} pages={data.totalPages} setGetApi={setGetApi} getApi={getApi}/>
       </>
     )
   }

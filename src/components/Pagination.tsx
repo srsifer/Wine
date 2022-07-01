@@ -1,4 +1,7 @@
 import React from 'react'
+import { CurrentButton, NextPageStylesButton, PreviousButtonStyles, UlButtonsPagination } from '../styles/components/PaginationStyles';
+import NextPageButton from '../assets/nextPageButton.svg'
+import ArrowLeft from '../assets/arrowLeft.svg'
 
 const BUTTONS_QUANTITY: number = 5;
 const MAX_BUTTONS_LEFT: number = (BUTTONS_QUANTITY - 1) / 2;
@@ -9,49 +12,53 @@ interface PaginationProps {
   getApi: object;
   setGetApi: Function
   current: number;
+  currentPage: number,
 }
 
 
-const Pagination = ({ limit, pages, current, getApi, setGetApi}: PaginationProps) => {
+const Pagination = ({ limit, pages, current, getApi, setGetApi, currentPage }: PaginationProps) => {
   const first = Math.max(current - MAX_BUTTONS_LEFT, 1);
 
   const onPageChanged = (page: number) => {
-    setGetApi({...getApi, page})
+    setGetApi({ ...getApi, page })
 
   }
 
   return (
-    <ul>
-        <li>
-          <button
-            onClick={() => onPageChanged(1)}
-            hidden={current === 1}
-          >
-            primeira pagina
-          </button>
-        </li>
-        {Array.from({ length:  Math.min(BUTTONS_QUANTITY, pages) })
-          .map((_, index) => index + first)
-          .map((page) => (
-            <li key={page}>
-              <button
-                onClick={() => onPageChanged(page)}
-                hidden={page > pages}
-              >
-                {page}
-              </button>
-            </li>
-          ))
-        }
-    <li>
-      <button
-      onClick={() => onPageChanged(pages)}
-      hidden={current === pages}
-      >
-        ultima pagina
-      </button>
-    </li>
-    </ul>
+    <UlButtonsPagination>
+      <li>
+        <PreviousButtonStyles
+          onClick={() => onPageChanged(currentPage -1)}
+          hidden={current === 1}
+        >
+          <ArrowLeft />
+          Anterior
+        </PreviousButtonStyles>
+      </li>
+      {Array.from({ length: Math.min(BUTTONS_QUANTITY, pages) })
+        .map((_, index) => index + first)
+        .map((page) => (
+          <li key={page}>
+            <CurrentButton
+              current={currentPage}
+              page={page}
+              onClick={() => onPageChanged(page)}
+              hidden={page > pages}
+            >
+              {page}
+            </CurrentButton>
+          </li>
+        ))
+      }
+      <li>
+        <NextPageStylesButton
+          onClick={() => onPageChanged(currentPage +1)}
+          hidden={current === pages}
+        >
+          <NextPageButton/>
+        </NextPageStylesButton>
+      </li>
+    </UlButtonsPagination>
   )
 }
 

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import LogoWineBlack from '../assets/LogoWineBlack.svg'
 import Busca from '../assets/BuscaLupa.svg'
 import Perfil from '../assets/perfil.svg'
@@ -12,17 +12,42 @@ import {
   SectionCartStyles,
   SectionSvgStyles,
   UlStyles
-  } from '../styles/components/NavBarHeaderStyles'
+} from '../styles/components/NavBarHeaderStyles'
 
 
-const { src, width, height,blur }: any = Cart;
 
-export default function NavBarHeader() {
+const { src, width, height, blur }: any = Cart;
+
+interface changeStateToFetchProps {
+  setGetApi: Function,
+  getApi: object,
+}
+interface States {
+  value: string
+}
+export default function NavBarHeader({ setGetApi, getApi }: changeStateToFetchProps) {
+  const [textFilter, setTextFilter] = useState<States>({ value: '' })
+  const [displaySearc, setDisplay] = useState(true)
+
+  const handleChange = (value: any) => {
+    setTextFilter(value)
+  }
+
+  const toggleDisplay = () => {
+    setDisplay(!displaySearc)
+  }
+
+  const filterByText = () => {
+    setGetApi({ ...getApi, ProductName: textFilter })
+    console.log(getApi)
+    toggleDisplay()
+  }
+
   return (
     <HeaderStyles>
       <label htmlFor="Home">
         <Link href="./">
-        <a><LogoWineBlack /></a>
+          <a><LogoWineBlack /></a>
         </Link>
       </label>
 
@@ -35,9 +60,25 @@ export default function NavBarHeader() {
       </UlStyles>
 
       <SectionSvgStyles>
-        <ButtonSearchStyles>
-        <Busca />
-        </ButtonSearchStyles>
+
+        <label>
+          <input
+            hidden={displaySearc}
+            onChange={(e) => handleChange(e.target.value)}
+            type="text" />
+          <button
+            hidden={displaySearc}
+            onClick={filterByText}
+          >buscar</button>
+          <ButtonSearchStyles
+            hidden={!displaySearc}
+            onClick={toggleDisplay}
+            type='button'
+          >
+            <Busca />
+          </ButtonSearchStyles>
+        </label>
+
         <Perfil />
         <label htmlFor="cart">
           <SectionCartStyles>

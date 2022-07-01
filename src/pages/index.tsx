@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import  FilterByPrice  from '../components/FilterByPrice'
 import NavBarHeader from '../components/NavBarHeader'
 import ProductList from '../components/ProductList'
 import { StylesDiv } from '../styles/pages/indexStyles'
 import { useFetch, UseFetchProps } from '../utils/getAPIWithSwr'
-
-
 
 const Home: React.FC = () => {
   const [getApi, setGetApi] = useState<UseFetchProps>({
@@ -22,7 +20,7 @@ const Home: React.FC = () => {
     }else{
       return (
         <>
-          <NavBarHeader />
+          <NavBarHeader setGetApi={setGetApi} getApi={getApi}/>
           <StylesDiv>
              <FilterByPrice  setGetApi={setGetApi} getApi={getApi} />
             <ProductList data={data} />
@@ -31,6 +29,5 @@ const Home: React.FC = () => {
         </>
         )
       }
-
     }
   export default Home

@@ -1,7 +1,12 @@
 import React from 'react'
-import { CurrentButton, NextPageStylesButton, PreviousButtonStyles, UlButtonsPagination } from '../styles/components/PaginationStyles';
-import NextPageButton from '../assets/nextPageButton.svg'
-import ArrowLeft from '../assets/arrowLeft.svg'
+import {
+  CurrentButton,
+  NextPageStylesButton,
+  PreviousButtonStyles,
+  UlButtonsPagination
+} from '../../../styles/components/PaginationStyles';
+import NextPageButton from '../../../assets/nextPageButton.svg'
+import ArrowLeft from '../../../assets/arrowLeft.svg'
 
 const BUTTONS_QUANTITY: number = 5;
 const MAX_BUTTONS_LEFT: number = (BUTTONS_QUANTITY - 1) / 2;
@@ -28,7 +33,7 @@ const Pagination = ({ limit, pages, current, getApi, setGetApi, currentPage }: P
     <UlButtonsPagination>
       <li>
         <PreviousButtonStyles
-          onClick={() => onPageChanged(currentPage -1)}
+          onClick={() => onPageChanged(currentPage - 1)}
           hidden={current === 1}
         >
           <ArrowLeft />
@@ -52,10 +57,10 @@ const Pagination = ({ limit, pages, current, getApi, setGetApi, currentPage }: P
       }
       <li>
         <NextPageStylesButton
-          onClick={() => onPageChanged(currentPage +1)}
+          onClick={() => onPageChanged(currentPage + 1)}
           hidden={current === pages}
         >
-          <NextPageButton/>
+          <NextPageButton />
         </NextPageStylesButton>
       </li>
     </UlButtonsPagination>

@@ -1,7 +1,14 @@
 import Link from 'next/link';
 import React from 'react'
-import BlackFriday from '../assets/black.svg'
-import { DisplayCardInfo, DivPriceAndDiscount, DivPriceMember, DivPriceNoMember, ProductCardDisplay } from '../styles/components/ProductCardStyles';
+import BlackFriday from '../../../assets/black.svg'
+import {
+  DisplayCardInfo,
+  DivPriceAndDiscount,
+  DivPriceMember,
+  DivPriceNoMember,
+  ProductCardDisplay
+} from '../../../styles/components/ProductCardStyles';
+
 interface ProductCardProps {
   item: {
     id: number;

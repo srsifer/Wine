@@ -1,7 +1,6 @@
 import React from 'react'
-import { DivProductsFound, MainContentDivList, ProductListStylesDiv } from '../styles/components/ProductListStyles'
-import { useFetch } from '../utils/getAPIWithSwr'
-import { DataProps } from '../utils/typesItem'
+import { DivProductsFound, MainContentDivList, ProductListStylesDiv } from '../../../styles/components/ProductListStyles'
+import { DataProps } from '../../../utils/typesItem'
 import Pagination from './Pagination'
 import ProductCard from './ProductCard'
 

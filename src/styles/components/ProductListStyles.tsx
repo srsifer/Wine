@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const ProductListStylesDiv = styled.div`
-  max-width: 70vw;
+  max-width: 60vw;
   margin-left: 4%;
-  min-width: 70vw;
+  min-width: 60vw;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -19,6 +19,6 @@ export const MainContentDivList = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   text-align: center;
 `

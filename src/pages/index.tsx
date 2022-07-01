@@ -29,9 +29,9 @@ const Home: React.FC = () => {
         <NavBarHeader setGetApi={setGetApi} getApi={getApi} />
         <StylesDiv>
           <FilterByPrice setGetApi={setGetApi} getApi={getApi} />
-          <ProductList data={data} />
+          <ProductList data={data} setGetApi={setGetApi} getApi={getApi}/>
         </StylesDiv>
-        <Pagination limit={data.itemsPerPage} current={data.page} pages={data.totalPages} setGetApi={setGetApi} getApi={getApi}/>
+
       </>
     )
   }

@@ -2,9 +2,16 @@ import React from 'react'
 import { DivProductsFound, MainContentDivList, ProductListStylesDiv } from '../styles/components/ProductListStyles'
 import { useFetch } from '../utils/getAPIWithSwr'
 import { DataProps } from '../utils/typesItem'
+import Pagination from './Pagination'
 import ProductCard from './ProductCard'
 
-const ProductList = ({data}: any) => {
+interface ProductListProps {
+  data: DataProps;
+  getApi: object;
+  setGetApi: Function;
+}
+
+const ProductList = ({data, getApi, setGetApi}: ProductListProps) => {
   return (
     <MainContentDivList>
       <DivProductsFound>
@@ -19,6 +26,7 @@ const ProductList = ({data}: any) => {
         })
       }
     </ProductListStylesDiv>
+    <Pagination limit={data.itemsPerPage} current={data.page} pages={data.totalPages} currentPage={data.page} setGetApi={setGetApi} getApi={getApi}/>
     </MainContentDivList>
   )
 }

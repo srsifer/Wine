@@ -20,7 +20,7 @@ const productDetails = () => {
     priceEnd: 600,
     ProductName: '',
     page: '1',
-    type: 'textFilter'
+    type: 'AllApi'
   })
 
 

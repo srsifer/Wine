@@ -4,9 +4,9 @@ import {
   NextPageStylesButton,
   PreviousButtonStyles,
   UlButtonsPagination
-} from '../../../styles/components/PaginationStyles';
-import NextPageButton from '../../../assets/nextPageButton.svg'
-import ArrowLeft from '../../../assets/arrowLeft.svg'
+} from '../../styles/components/PaginationStyles';
+import NextPageButton from '../../assets/nextPageButton.svg'
+import ArrowLeft from '../../assets/arrowLeft.svg'
 
 const BUTTONS_QUANTITY: number = 5;
 const MAX_BUTTONS_LEFT: number = (BUTTONS_QUANTITY - 1) / 2;

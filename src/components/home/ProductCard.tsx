@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import React from 'react'
-import BlackFriday from '../../../assets/black.svg'
+import BlackFriday from '../../assets/black.svg'
 import {
   DisplayCardInfo,
   DivPriceAndDiscount,
   DivPriceMember,
   DivPriceNoMember,
   ProductCardDisplay
-} from '../../../styles/components/ProductCardStyles';
+} from '../../styles/components/ProductCardStyles';
 
 interface ProductCardProps {
   item: {

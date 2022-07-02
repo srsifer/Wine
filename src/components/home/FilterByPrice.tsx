@@ -1,4 +1,4 @@
-import { FilterPriceUlStyles, FilterStylesDiv } from '../../../styles/components/FilterByPriceStyles'
+import { FilterPriceUlStyles, FilterStylesDiv } from '../../styles/components/FilterByPriceStyles'
 
 
 interface changeStateToFetchProps {

@@ -22,9 +22,6 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ item }: ProductCardProps) {
-
-  const [dataOrder, setDataOrder] = useState({})
-
   const createObjectOrder = () => {
     const { name, priceMember, id } = item;
     const objectOrder = {

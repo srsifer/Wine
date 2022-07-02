@@ -28,8 +28,6 @@ interface AboutProductProps {
 }
 
 export const AboutProduct = ({ data }: AboutProductProps) => {
-
-  console.log(data)
   return (
     <DescriptionDetailsSection>
       <LocationStatusDiv>

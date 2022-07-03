@@ -14,21 +14,24 @@ import {
   SectionSvgStyles,
   UlStyles
 } from '../styles/components/NavBarHeaderStyles'
+import { MyContext } from '../provider/Store'
 
 
 
 const { src, width, height, blur }: any = Cart;
-
 interface changeStateToFetchProps {
   setGetApi: Function,
   getApi: object,
+  openModal: Function
 }
 interface States {
   value: string
 }
-export default function NavBarHeader({ setGetApi, getApi }: changeStateToFetchProps) {
+
+export default function NavBarHeader({ setGetApi, getApi, openModal }: changeStateToFetchProps) {
   const [textFilter, setTextFilter] = useState<States>({ value: '' })
   const [displaySearc, setDisplay] = useState(true)
+  const {globalState} = React.useContext(MyContext)
 
   const handleChange = (value: any) => {
     setTextFilter(value)
@@ -42,6 +45,7 @@ export default function NavBarHeader({ setGetApi, getApi }: changeStateToFetchPr
     setGetApi({ ...getApi, ProductName: textFilter, type: 'textFilter' })
     toggleDisplay()
   }
+
 
   return (
     <HeaderStyles>
@@ -84,10 +88,10 @@ export default function NavBarHeader({ setGetApi, getApi }: changeStateToFetchPr
         </label>
 
         <Perfil />
-        <label htmlFor="cart">
+        <label htmlFor="cart" onClick={() => openModal()}>
           <SectionCartStyles>
             <Image src={src} width={width} height={height} placeholder={blur} />
-            <DivCountStyles><p>0</p></DivCountStyles>
+            <DivCountStyles><p>{!globalState ? 0 : globalState.length}</p></DivCountStyles>
           </SectionCartStyles>
         </label>
       </SectionSvgStyles>

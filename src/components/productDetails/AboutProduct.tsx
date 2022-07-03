@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import StarRatings from 'react-star-ratings'
 import { DescriptionDetailsSection, DivAddButton, DivButtons, DivpricesDetails, DivTagDescription, LocationStatusDiv } from '../../styles/pages/productDetails'
 import ButtonCoutAdd from '../../assets/buttonCountAdd.svg';
 import ButtonCoutRemove from '../../assets/buttonCountRemove.svg'
 import ArrowLeft from '../../assets/arrowLeft.svg'
+import { MyContext } from '../../provider/Store';
 
 interface AboutProductProps {
 
@@ -27,7 +28,76 @@ interface AboutProductProps {
   }
 }
 
+interface StateObjectOrder {
+  id: number
+  name: string
+  image: string
+  priceMember: number
+  quantity: number,
+}
+
+
 export const AboutProduct = ({ data }: AboutProductProps) => {
+  const initialState = {
+    id: data.id,
+    name: data.name,
+    image: data.image,
+    quantity: 1,
+    priceMember: data.priceMember,
+  }
+  const { setGlobalState} = useContext(MyContext)
+  const [ObjectOrder, setObjectOrder] = useState<StateObjectOrder>(initialState)
+
+
+  const AddToCart = () => {
+    const AllProducts = JSON.parse(localStorage.getItem('allProducts') || '[]')
+
+    if (AllProducts.length == 0) {
+      const { priceMember, quantity} = ObjectOrder
+      const newPriceMember = priceMember * quantity
+      setObjectOrder({...ObjectOrder, priceMember: newPriceMember})
+      setGlobalState([ ObjectOrder ])
+      localStorage.setItem('allProducts', JSON.stringify([ObjectOrder]))
+      setObjectOrder(initialState)
+    }
+
+    const itemFound = AllProducts.find((item: typeof ObjectOrder) => item.id === ObjectOrder.id);
+
+    if (itemFound) {
+      AllProducts.forEach((localitem: typeof ObjectOrder) => {
+        if (localitem.id === ObjectOrder.id) {
+          localitem.priceMember += (ObjectOrder.priceMember * localitem.quantity),
+          localitem.quantity+= ObjectOrder.quantity
+        }
+      })
+    }
+
+    if (itemFound == undefined) {
+
+      AllProducts.push(ObjectOrder)
+
+    }
+    setGlobalState(AllProducts)
+    localStorage.setItem('allProducts', JSON.stringify(AllProducts));
+    setObjectOrder(initialState)
+  }
+
+
+  const setQuantityDown = () => {
+    const {quantity} = ObjectOrder;
+    const newquantity = quantity -1
+    if(quantity >= 1){
+      setObjectOrder({ ...ObjectOrder, quantity: newquantity })
+    }
+  }
+
+  const setQuantityUp = () => {
+    const {quantity} = ObjectOrder;
+    const newquantity = quantity + 1
+    setObjectOrder({...ObjectOrder, quantity: + newquantity })
+  }
+
+
   return (
     <DescriptionDetailsSection>
       <LocationStatusDiv>
@@ -64,11 +134,21 @@ export const AboutProduct = ({ data }: AboutProductProps) => {
       <h3>comentario do somelier</h3>
       <p>{data.sommelierComment}</p>
       <DivButtons>
-        <button><ButtonCoutRemove /></button>
-        <p>count</p>
-        <button><ButtonCoutAdd /></button>
+        <button
+          onClick={ () => setQuantityDown()}
+        >
+          <ButtonCoutRemove />
+          </button>
+        <p>{ObjectOrder.quantity}</p>
+        <button
+          onClick={ () => setQuantityUp()}
+        >
+          <ButtonCoutAdd />
+          </button>
         <DivAddButton>
-          <button>
+          <button
+          onClick={ () => AddToCart()}
+          >
             <p>Adicionar</p>
           </button>
         </DivAddButton>

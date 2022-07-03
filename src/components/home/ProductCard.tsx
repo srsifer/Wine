@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import BlackFriday from '../../assets/black.svg'
+import { MyContext } from '../../provider/Store';
 import {
   DisplayCardInfo,
   DivPriceAndDiscount,
@@ -23,26 +24,27 @@ interface ProductCardProps {
 
 export default function ProductCard({ item }: ProductCardProps) {
   const createObjectOrder = () => {
-    const { name, priceMember, id } = item;
+    const { name, priceMember, id, image } = item;
     const objectOrder = {
       id,
       name,
+      image,
       priceMember,
       quantity: 1
     }
     return objectOrder;
   }
-
+  const { setGlobalState} = useContext(MyContext)
   const AddToCart = () => {
     const itemOrder = createObjectOrder()
     const AllProducts = JSON.parse(localStorage.getItem('allProducts') || '[]')
-    console.log(typeof AllProducts);
+
 
     if (AllProducts.length == 0) {
-      console.log("entrei no if")
-     return localStorage.setItem('allProducts', JSON.stringify([itemOrder]))
+      setGlobalState([itemOrder])
+      return localStorage.setItem('allProducts', JSON.stringify([itemOrder]))
     }
-    console.log('não terminei')
+
     const itemFound = AllProducts.find((item: typeof itemOrder) => item.id === itemOrder.id);
 
     if (itemFound) {
@@ -55,12 +57,12 @@ export default function ProductCard({ item }: ProductCardProps) {
     }
 
     if (itemFound == undefined) {
-      console.log("entrei na terceira condição")
+
       AllProducts.push(itemOrder)
-      console.log(AllProducts)
+
     }
-    localStorage.setItem('allProducts', JSON.stringify(AllProducts))
-    console.log(itemFound)
+    setGlobalState(AllProducts)
+    localStorage.setItem('allProducts', JSON.stringify(AllProducts));
   }
 
   return (

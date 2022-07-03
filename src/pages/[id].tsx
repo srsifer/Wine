@@ -11,6 +11,7 @@ import {
   SectionImageStyles
 } from '../styles/pages/productDetails';
 import { AboutProduct } from '../components/productDetails/AboutProduct';
+import CartModal from '../components/CartModal';
 
 const productDetails = () => {
   const router = useRouter().query.id;
@@ -23,6 +24,16 @@ const productDetails = () => {
     type: 'AllApi'
   })
 
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   const { data } = useFetch<DataProps>(getApi)
 
@@ -31,7 +42,8 @@ const productDetails = () => {
   } else {
     return (
       <>
-        <NavBarHeader setGetApi={setGetApi} getApi={getApi} />
+        <NavBarHeader setGetApi={setGetApi} getApi={getApi} openModal={openModal} />
+        <CartModal closeModal={closeModal} modalIsOpen={modalIsOpen} />
         <MainContentStylesDiv>
           <Link href={'/'}>
             <a>

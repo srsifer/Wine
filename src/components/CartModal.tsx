@@ -86,7 +86,7 @@ export default function CartModal(props: CartModalProps) {
                     </DivNameAndRemoveItem>
                     <DivPriceAndTotal>
                       <p>{item.quantity}</p>
-                      <h2>{`R$ ${item.priceMember}`}</h2>
+                      <h2>{`R$ ${item.priceMember.toFixed(2)}`}</h2>
                     </DivPriceAndTotal>
                   </DivInformationOrder>
                 </DivcardItemCart>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useState } from 'react'
 import FilterByPrice from '../components/home/FilterByPrice'
 import NavBarHeader from '../components/NavBarHeader'
 import ProductList from '../components/home/ProductList'
@@ -6,7 +6,7 @@ import { StylesDiv } from '../styles/pages/indexStyles'
 import { useFetch, UseFetchProps } from '../utils/getAPIWithSwr'
 import { DataProps } from '../utils/typesItem'
 import CartModal from '../components/CartModal'
-import { MyContext } from '../provider/Store'
+
 
 const Home: React.FC = () => {
   const InitialStateGetApi = {
@@ -17,7 +17,6 @@ const Home: React.FC = () => {
     type: ''
   }
   const [getApi, setGetApi] = useState<UseFetchProps>({ ...InitialStateGetApi })
-  const [render, setRender] = useState([])
   const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
@@ -31,8 +30,6 @@ const Home: React.FC = () => {
 
 
   const { data } = useFetch<DataProps>(getApi)
-
-
 
   if (!data) {
     return <h1>carregando</h1>

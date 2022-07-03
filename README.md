@@ -1,11 +1,11 @@
-<h1 align="center">Boas vindas ao testes desafio do técnicos wine</h1>
+<h1 align="center">Boas vindas ao teste. Desafio técnico da Wine</h1>
 
 ###
 
 <p align="left">Esse App se trata de um e-commerce para venda de vinhos. E tiveram as seguintes funcionalidades como requisito: </p>
 
 - [x] Catálogo de produtos com paginação
-- [x] Filtragem produtos por preço
+- [x] Filtragem de produtos por preço
 - [x] Busca por nome do produto
 - [x] Adicionar e remover produtos do carrinho
 
@@ -16,7 +16,7 @@
   
 ###
 
-<p align="left">Antes de seguir com o tutorial de instalação  gostaria de informá-los que este app está hospedado nos serviços da vercel.  <br><br>A mesma contém uma integração muito boa com os Aplicativos criados em next para realizar deploys inteligentes e automatizados de maneira simples rápida e eficaz <br>aqui está o link para visitas, divirta se https://wine-iota.vercel.app/</p>
+<p align="left">Antes de seguir com o tutorial de instalação  gostaria de informá-los que este app está hospedado nos serviços da vercel.  <br><br>A mesma contém uma integração muito boa com os Aplicativos criados em next para realizar deploys inteligentes e automatizados de maneira simples rápida e eficaz. <br>Aqui está o link para visitas divirta se https://wine-iota.vercel.app/</p>
 
 ###
 

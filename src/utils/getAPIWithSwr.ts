@@ -18,6 +18,8 @@ const typeRequest = ({priceStart, priceEnd, ProductName, page, type}: UseFetchPr
 
     case 'textFilter':
        return url = `https://wine-back-test.herokuapp.com/products?page=${page}&limit=9&name=${ProductName}`
+    case 'AllApi':
+      return url = `https://wine-back-test.herokuapp.com/products?page=${page}`
     default:
       return url = `https://wine-back-test.herokuapp.com/products?page=${page}&limit=9`
   }

@@ -76,7 +76,7 @@ export const SectionCartStyles = styled.section`
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 2;
+  z-index: 0;
   img {
     border-radius: 0 0 16% 16%;
   }

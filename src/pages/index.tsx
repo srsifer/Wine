@@ -32,7 +32,13 @@ const Home: React.FC = () => {
   const { data } = useFetch<DataProps>(getApi)
 
   if (!data) {
-    return <h1>carregando</h1>
+    return <>
+      <NavBarHeader setGetApi={setGetApi} getApi={getApi} openModal={openModal} />
+      <CartModal closeModal={closeModal} modalIsOpen={modalIsOpen} />
+        <StylesDiv>
+          <FilterByPrice setGetApi={setGetApi} getApi={getApi} />
+        </StylesDiv>
+  </>
   } else {
     return (
       <>

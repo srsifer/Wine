@@ -8,7 +8,8 @@ import { DataProps } from '../utils/typesItem'
 import CartModal from '../components/CartModal'
 
 
-const Home: React.FC = () => {
+const Home = ({data}) => {
+
   const InitialStateGetApi = {
     priceStart: 0,
     priceEnd: 600,
@@ -16,6 +17,7 @@ const Home: React.FC = () => {
     page: '1',
     type: ''
   }
+
   const [getApi, setGetApi] = useState<UseFetchProps>({ ...InitialStateGetApi })
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -23,21 +25,21 @@ const Home: React.FC = () => {
     setIsOpen(true);
   }
 
-
   function closeModal() {
     setIsOpen(false);
   }
 
+   data  = useFetch<DataProps>(getApi).data
 
-  const { data } = useFetch<DataProps>(getApi)
 
   if (!data) {
     return <>
       <NavBarHeader setGetApi={setGetApi} getApi={getApi} openModal={openModal} />
       <CartModal closeModal={closeModal} modalIsOpen={modalIsOpen} />
-        <StylesDiv>
-          <FilterByPrice setGetApi={setGetApi} getApi={getApi} />
-        </StylesDiv>
+      <StylesDiv>
+        <FilterByPrice setGetApi={setGetApi} getApi={getApi} />
+        <div>carregando</div>
+      </StylesDiv>
   </>
   } else {
     return (
@@ -52,4 +54,16 @@ const Home: React.FC = () => {
     )
   }
 }
+
+export const getStaticProps = async () => {
+  const response =  await fetch('https://wine-back-test.herokuapp.com/products?page=1&limit=9')
+  const staticData =  await response.json()
+
+  return {
+      props :{
+      staticData
+    }
+  }
+}
+
 export default Home

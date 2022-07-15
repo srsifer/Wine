@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FilterByPrice from '../components/home/FilterByPrice'
 import NavBarHeader from '../components/NavBarHeader'
 import ProductList from '../components/home/ProductList'
@@ -6,9 +6,10 @@ import { StylesDiv } from '../styles/pages/indexStyles'
 import { useFetch, UseFetchProps } from '../utils/getAPIWithSwr'
 import { DataProps } from '../utils/typesItem'
 import CartModal from '../components/CartModal'
+import { MainContentDivList } from '../styles/components/ProductListStyles'
 
 
-const Home = ({data}) => {
+const Home = ({data}: any) => {
 
   const InitialStateGetApi = {
     priceStart: 0,
@@ -20,6 +21,7 @@ const Home = ({data}) => {
 
   const [getApi, setGetApi] = useState<UseFetchProps>({ ...InitialStateGetApi })
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [renderData, setRenderData ] = useState(data)
 
   function openModal() {
     setIsOpen(true);
@@ -29,16 +31,17 @@ const Home = ({data}) => {
     setIsOpen(false);
   }
 
-   data  = useFetch<DataProps>(getApi).data
+  const filtredData = useFetch<DataProps>(getApi).data
 
-
-  if (!data) {
+  if (!renderData) {
     return <>
       <NavBarHeader setGetApi={setGetApi} getApi={getApi} openModal={openModal} />
       <CartModal closeModal={closeModal} modalIsOpen={modalIsOpen} />
       <StylesDiv>
         <FilterByPrice setGetApi={setGetApi} getApi={getApi} />
-        <div>carregando</div>
+        <MainContentDivList>
+          <h1> carregando... </h1>
+        </MainContentDivList>
       </StylesDiv>
   </>
   } else {
@@ -48,7 +51,7 @@ const Home = ({data}) => {
         <CartModal closeModal={closeModal} modalIsOpen={modalIsOpen} />
         <StylesDiv>
           <FilterByPrice setGetApi={setGetApi} getApi={getApi} />
-          <ProductList data={data} setGetApi={setGetApi} getApi={getApi} />
+          <ProductList data={filtredData? filtredData : renderData} setGetApi={setGetApi} getApi={getApi} />
         </StylesDiv>
       </>
     )
@@ -57,11 +60,10 @@ const Home = ({data}) => {
 
 export const getStaticProps = async () => {
   const response =  await fetch('https://wine-back-test.herokuapp.com/products?page=1&limit=9')
-  const staticData =  await response.json()
-
+  const data =  await response.json()
   return {
       props :{
-      staticData
+      data
     }
   }
 }

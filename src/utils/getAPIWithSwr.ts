@@ -28,7 +28,6 @@ const typeRequest = ({priceStart, priceEnd, ProductName, page, type}: UseFetchPr
 export function useFetch<Data = any>(props: UseFetchProps) {
   const url = typeRequest(props)
   const {data, error} = useSWR<Data>(url, async url => {
-    console.log(url)
     const response = await fetch(url);
     const data = await response.json();
     return data

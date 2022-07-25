@@ -48,6 +48,7 @@ export interface ItemOrder {
 
 export interface AboutProductProps {
   data: {
+    [x: string]: any;
     avaliations: number;
     classification: string;
     country: string;

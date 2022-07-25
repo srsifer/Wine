@@ -31,7 +31,7 @@ export default function ProductCard({ item }: ProductCardProps) {
     <ProductCardDisplay>
       <DisplayCardInfo key={item.id}>
         <div>
-          <Link href={`./${item.id}`}>
+          <Link href={`./ id=${item.id} name=${item.name}`}>
             <a>
               <img src={item.image} alt={`imagem do vinho ${item.name}`} />
               <BlackFriday />

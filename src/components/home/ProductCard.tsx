@@ -10,18 +10,7 @@ import {
   ProductCardDisplay
 } from '../../styles/components/ProductCardStyles';
 import { AddToCart } from '../../utils/hooks';
-
-interface ProductCardProps {
-  item: {
-    id: number;
-    image: string;
-    name: string;
-    price: number;
-    priceMember: number;
-    priceNonMember: number;
-    discount: number;
-  }
-}
+import { ProductCardProps } from '../../utils/typesItem';
 
 export default function ProductCard({ item }: ProductCardProps) {
   const { setGlobalState } = useContext(MyContext)

@@ -24,3 +24,24 @@ export interface DataProps {
   totalItems: number;
   totalPages: number;
 }
+
+
+export interface ProductCardProps {
+  item: {
+    id: number;
+    image: string;
+    name: string;
+    price: number;
+    priceMember: number;
+    priceNonMember: number;
+    discount: number;
+  }
+}
+
+export interface ItemOrder {
+  id: number;
+  name: string;
+  image: string;
+  priceMember: number;
+  quantity: number;
+}

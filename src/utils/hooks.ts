@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { MyContext } from "../provider/Store";
+import { ItemOrder } from "./typesItem";
 
 
 
@@ -17,7 +18,7 @@ const FindItemEqualStorage = (AllProducts: Array<{}>, itemOrder: any) => {
   })
 }
 
-export const AddToCart = (createObjectOrder: Function, setGlobalState : any) => {
+export const AddToCart = (createObjectOrder: ItemOrder, setGlobalState : Function) => {
   const itemOrder = createObjectOrder
 
   const AllProducts = JSON.parse(localStorage.getItem('allProducts') || '[]')
@@ -33,7 +34,6 @@ export const AddToCart = (createObjectOrder: Function, setGlobalState : any) => 
   if (itemFound == undefined) {
     AllProducts.push(itemOrder)
   }
-
 
   setGlobalState(AllProducts)
   localStorage.setItem('allProducts', JSON.stringify(AllProducts));

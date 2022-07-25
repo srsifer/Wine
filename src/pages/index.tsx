@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import FilterByPrice from '../components/home/FilterByPrice'
 import NavBarHeader from '../components/NavBarHeader'
 import ProductList from '../components/home/ProductList'
@@ -7,7 +7,6 @@ import { useFetch, UseFetchProps } from '../utils/getAPIWithSwr'
 import { DataProps } from '../utils/typesItem'
 import CartModal from '../components/CartModal'
 import { MainContentDivList } from '../styles/components/ProductListStyles'
-
 
 const Home = ({data}: any) => {
 
@@ -21,7 +20,7 @@ const Home = ({data}: any) => {
 
   const [getApi, setGetApi] = useState<UseFetchProps>({ ...InitialStateGetApi })
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [renderData, setRenderData ] = useState(data)
+  const [renderData, setRenderData ] = useState(data);
 
   function openModal() {
     setIsOpen(true);
@@ -59,13 +58,13 @@ const Home = ({data}: any) => {
 }
 
 export const getStaticProps = async () => {
-  const response =  await fetch('https://wine-back-test.herokuapp.com/products?page=1&limit=9')
-  const data =  await response.json()
+  const response = await fetch('https://wine-back-test.herokuapp.com/products?page=1&limit=9');
+  const data = await response.json();
   return {
       props :{
       data
     }
-  }
-}
+  };
+};
 
 export default Home

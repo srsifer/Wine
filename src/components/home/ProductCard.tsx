@@ -9,6 +9,7 @@ import {
   DivPriceNoMember,
   ProductCardDisplay
 } from '../../styles/components/ProductCardStyles';
+import { AddToCart } from '../../utils/hooks';
 
 interface ProductCardProps {
   item: {
@@ -23,6 +24,8 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ item }: ProductCardProps) {
+  const { setGlobalState } = useContext(MyContext)
+
   const createObjectOrder = () => {
     const { name, priceMember, id, image } = item;
     const objectOrder = {
@@ -33,36 +36,6 @@ export default function ProductCard({ item }: ProductCardProps) {
       quantity: 1
     }
     return objectOrder;
-  }
-  const { setGlobalState} = useContext(MyContext)
-  const AddToCart = () => {
-    const itemOrder = createObjectOrder()
-    const AllProducts = JSON.parse(localStorage.getItem('allProducts') || '[]')
-
-
-    if (AllProducts.length == 0) {
-      setGlobalState([itemOrder])
-      return localStorage.setItem('allProducts', JSON.stringify([itemOrder]))
-    }
-
-    const itemFound = AllProducts.find((item: typeof itemOrder) => item.id === itemOrder.id);
-
-    if (itemFound) {
-      AllProducts.forEach((localitem: typeof itemOrder) => {
-        if (localitem.id === itemOrder.id) {
-          localitem.priceMember += itemOrder.priceMember
-          localitem.quantity += 1
-        }
-      })
-    }
-
-    if (itemFound == undefined) {
-
-      AllProducts.push(itemOrder)
-
-    }
-    setGlobalState(AllProducts)
-    localStorage.setItem('allProducts', JSON.stringify(AllProducts));
   }
 
   return (
@@ -94,7 +67,7 @@ export default function ProductCard({ item }: ProductCardProps) {
 
       </DisplayCardInfo>
       <button
-        onClick={AddToCart}
+        onClick={() => AddToCart(createObjectOrder(), setGlobalState)}
       >
         Adicionar
       </button>

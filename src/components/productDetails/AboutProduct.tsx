@@ -1,43 +1,22 @@
 import React, { useContext, useState } from 'react'
 import StarRatings from 'react-star-ratings'
-import { DescriptionDetailsSection, DivAddButton, DivButtons, DivpricesDetails, DivTagDescription, LocationStatusDiv } from '../../styles/pages/productDetails'
 import ButtonCoutAdd from '../../assets/buttonCountAdd.svg';
 import ButtonCoutRemove from '../../assets/buttonCountRemove.svg'
 import ArrowLeft from '../../assets/arrowLeft.svg'
 import { MyContext } from '../../provider/Store';
-
-interface AboutProductProps {
-
-  data: {
-    avaliations: number;
-    classification: string;
-    country: string;
-    discount: number;
-    flag: string;
-    id: number;
-    image: string;
-    name: string;
-    price: number;
-    priceMember: number;
-    priceNonMember: number;
-    rating: number;
-    region: string;
-    size: string;
-    sommelierComment: string;
-    type: string;
-  }
-}
-
-interface StateObjectOrder {
-  id: number
-  name: string
-  image: string
-  priceMember: number
-  quantity: number,
-}
-
+import { AboutProductProps, ItemOrder } from '../../utils/typesItem';
+import { AddToCart } from '../../utils/hooks';
+import {
+  DescriptionDetailsSection,
+  DivAddButton,
+  DivButtons,
+  DivpricesDetails,
+  DivTagDescription,
+  LocationStatusDiv 
+} from '../../styles/pages/productDetails'
 
 export const AboutProduct = ({ data }: AboutProductProps) => {
+  const { setGlobalState } = useContext(MyContext)
   const initialState = {
     id: data.id,
     name: data.name,
@@ -45,43 +24,13 @@ export const AboutProduct = ({ data }: AboutProductProps) => {
     quantity: 1,
     priceMember: data.priceMember,
   }
-  const { setGlobalState} = useContext(MyContext)
-  const [ObjectOrder, setObjectOrder] = useState<StateObjectOrder>(initialState)
 
+  const [ObjectOrder, setObjectOrder] = useState<ItemOrder>(initialState)
 
-  const AddToCart = () => {
-    const AllProducts = JSON.parse(localStorage.getItem('allProducts') || '[]')
-
-    if (AllProducts.length == 0) {
-      const { priceMember, quantity} = ObjectOrder
-      const newPriceMember = priceMember * quantity
-      setObjectOrder({...ObjectOrder, priceMember: newPriceMember})
-      setGlobalState([ ObjectOrder ])
-      localStorage.setItem('allProducts', JSON.stringify([ObjectOrder]))
-      setObjectOrder(initialState)
-    }
-
-    const itemFound = AllProducts.find((item: typeof ObjectOrder) => item.id === ObjectOrder.id);
-
-    if (itemFound) {
-      AllProducts.forEach((localitem: typeof ObjectOrder) => {
-        if (localitem.id === ObjectOrder.id) {
-          localitem.priceMember += (ObjectOrder.priceMember * localitem.quantity),
-          localitem.quantity+= ObjectOrder.quantity
-        }
-      })
-    }
-
-    if (itemFound == undefined) {
-
-      AllProducts.push(ObjectOrder)
-
-    }
-    setGlobalState(AllProducts)
-    localStorage.setItem('allProducts', JSON.stringify(AllProducts));
+  const AddToCartFromDetailsProduct = () => {
+    AddToCart(ObjectOrder, setGlobalState )
     setObjectOrder(initialState)
   }
-
 
   const setQuantityDown = () => {
     const {quantity} = ObjectOrder;
@@ -97,6 +46,9 @@ export const AboutProduct = ({ data }: AboutProductProps) => {
     setObjectOrder({...ObjectOrder, quantity: + newquantity })
   }
 
+  const textFormater = (price: number) => {
+    return Number(price).toFixed(2).replace('.', ',')
+  }
 
   return (
     <DescriptionDetailsSection>
@@ -127,9 +79,9 @@ export const AboutProduct = ({ data }: AboutProductProps) => {
       <DivpricesDetails>
         <div>
           <h3>R$</h3>
-          <h2>{Number(data.priceMember).toFixed(2).replace('.', ',')}</h2>
+          <h2>{textFormater(data.priceMember)}</h2>
         </div>
-        <p>{` NÃO SÓCIO ${Number(data.priceNonMember).toFixed(2).replace('.', ',')}/UN`}</p>
+        <p>{` NÃO SÓCIO ${textFormater(data.priceNonMember)}/UN`}</p>
       </DivpricesDetails>
       <h3>comentario do somelier</h3>
       <p>{data.sommelierComment}</p>
@@ -147,7 +99,7 @@ export const AboutProduct = ({ data }: AboutProductProps) => {
           </button>
         <DivAddButton>
           <button
-          onClick={ () => AddToCart()}
+          onClick={ () => AddToCartFromDetailsProduct()}
           >
             <p>Adicionar</p>
           </button>

@@ -1,8 +1,4 @@
-import React, { useContext } from "react";
-import { MyContext } from "../provider/Store";
 import { ItemOrder } from "./typesItem";
-
-
 
 const veryfiStorageEmpty = (itemOrder: object, setGlobalState: any) => {
   setGlobalState([itemOrder])
@@ -12,8 +8,8 @@ const veryfiStorageEmpty = (itemOrder: object, setGlobalState: any) => {
 const FindItemEqualStorage = (AllProducts: Array<{}>, itemOrder: any) => {
   AllProducts.forEach((localitem: typeof itemOrder) => {
     if (localitem.id === itemOrder.id) {
-      localitem.priceMember += itemOrder.priceMember
-      localitem.quantity += 1
+      localitem.priceMember = itemOrder.priceMember * localitem.quantity
+      localitem.quantity +=  itemOrder.quantity
     }
   })
 }
